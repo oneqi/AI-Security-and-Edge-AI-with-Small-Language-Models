@@ -1,0 +1,46 @@
+services:
+  ollama:
+    build:
+      context: ./ollama
+    container_name: ollama
+    ports:
+      - "11433:11434"
+    volumes:
+      - ollama_data:/root/.ollama
+    restart: unless-stopped
+
+  chroma:
+    image: ghcr.io/chroma-core/chroma:latest
+    container_name: chroma
+    ports:
+      - "8000:8000"
+    volumes:
+      - ./policy_db:/data
+    environment:
+      - IS_PERSISTENT=TRUE
+      - CHROMA_DB_IMPL=duckdb+parquet
+      - PERSIST_DIRECTORY=/data
+    restart: unless-stopped
+
+  gradio:
+    build:
+      context: ./gradio
+    container_name: gradio
+    ports:
+      - "7860:7860"
+    environment:
+      - OLLAMA_HOST=http://ollama:11434
+      - CHROMA_HOST=http://chroma:8000
+      - CHROMA_COLLECTION=globomantics_policies
+      - POLICY_PDF=/data/executives_usa_policies.pdf
+      - GRADIO_SERVER_NAME=0.0.0.0
+      - GRADIO_SERVER_PORT=7860
+    volumes:
+      - ./policy_db:/data:ro
+    depends_on:
+      - ollama
+      - chroma
+    restart: unless-stopped
+
+volumes:
+  ollama_data:
