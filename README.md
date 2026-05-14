@@ -19,6 +19,9 @@ Using `docker compose` and `Dockerfile` to create:
 - ghcr.io/chroma-core/chroma:1.5.9
 - ollama/ollama:0.23.3
 
+## Sample Document
+Located at `policy_db/executives_usa_policies.pdf` which contains sample sensitive data (name, address, phone number) of the executives
+
 ## Steps
 ### Terminal 1
 Open a terminal and change directory to the cloned repo
