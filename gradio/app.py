@@ -11,7 +11,7 @@ from langchain_text_splitters import RecursiveCharacterTextSplitter
 
 OLLAMA_HOST = os.getenv("OLLAMA_HOST", "http://ollama:11434")
 CHROMA_HOST = os.getenv("CHROMA_HOST", "http://chroma:8000")
-CHROMA_COLLECTION = os.getenv("CHROMA_COLLECTION", "globomantics_policies")
+CHROMA_COLLECTION = os.getenv("CHROMA_COLLECTION", "executives_usa_policies")
 POLICY_PDF = os.getenv("POLICY_PDF", "/data/executives_usa_policies.pdf")
 
 ollama_client = ollama.Client(host=OLLAMA_HOST)
