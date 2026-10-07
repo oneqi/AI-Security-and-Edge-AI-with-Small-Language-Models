@@ -104,6 +104,8 @@ docker compose down
   - Open sourced or licensed ?
     - What are the security implications ?
   - Are any ports exposed ?
+
+4) Application Environment
 - What guardrails are being used ?
   - Jailbreak testing ?
 
